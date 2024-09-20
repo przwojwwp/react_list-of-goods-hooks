@@ -66,7 +66,7 @@ export const App: React.FC = () => {
       <div className="buttons">
         <button
           type="button"
-          className="button is-info is-light"
+          className={`button is-info ${sortType === SortType.ALPHABET ? '' : 'is-light'}`}
           onClick={() => {
             setSortType(SortType.ALPHABET);
           }}
@@ -76,7 +76,7 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className="button is-success is-light"
+          className={`button is-success ${sortType === SortType.LENGTH ? '' : 'is-light'}`}
           onClick={() => {
             setSortType(SortType.LENGTH);
           }}
@@ -86,7 +86,7 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className="button is-warning is-light"
+          className={`button is-warning ${isReversed ? '' : 'is-light'}`}
           onClick={() => {
             setIsReversed(!isReversed);
           }}
@@ -94,16 +94,18 @@ export const App: React.FC = () => {
           Reverse
         </button>
 
-        <button
-          type="button"
-          className="button is-danger is-light"
-          onClick={() => {
-            setSortType(SortType.NONE);
-            setIsReversed(false);
-          }}
-        >
-          Reset
-        </button>
+        {(sortType !== SortType.NONE || isReversed) && (
+          <button
+            type="button"
+            className="button is-danger"
+            onClick={() => {
+              setSortType(SortType.NONE);
+              setIsReversed(false);
+            }}
+          >
+            Reset
+          </button>
+        )}
       </div>
 
       <ul>
