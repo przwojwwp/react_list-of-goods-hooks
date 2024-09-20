@@ -21,10 +21,36 @@ enum SortType {
   LENGTH,
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ReorderedOptions = {
   sortType: SortType;
   isReversed: boolean;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getReorderedGoods = (
+  goods: string[],
+  { sortType, isReversed }: ReorderedOptions,
+) => {
+  const availableGoods = [...goods];
+
+  switch (sortType) {
+    case SortType.ALPHABET:
+      availableGoods.sort((a, b) => a.localeCompare(b));
+      break;
+
+    case SortType.LENGTH:
+      availableGoods.sort((a, b) => a.length - b.length);
+      break;
+
+    default:
+      break;
+  }
+
+  if (isReversed) {
+    availableGoods.reverse();
+  }
+
+  return availableGoods;
 };
 
 export const App: React.FC = () => {
