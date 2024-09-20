@@ -15,6 +15,18 @@ export const goodsFromServer = [
   'Garlic',
 ];
 
+enum SortType {
+  NONE,
+  ALPHABET,
+  LENGTH,
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type ReorderedOptions = {
+  sortType: SortType;
+  isReversed: boolean;
+};
+
 export const App: React.FC = () => {
   return (
     <div className="section content">
