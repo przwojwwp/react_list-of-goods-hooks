@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -26,7 +26,6 @@ type ReorderedOptions = {
   isReversed: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getReorderedGoods = (
   goods: string[],
   { sortType, isReversed }: ReorderedOptions,
@@ -54,6 +53,16 @@ const getReorderedGoods = (
 };
 
 export const App: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [sortType, setSortType] = useState(SortType.NONE);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isReversed, setIsReversed] = useState(false);
+
+  const reorderedGoods = getReorderedGoods(goodsFromServer, {
+    sortType,
+    isReversed,
+  });
+
   return (
     <div className="section content">
       <div className="buttons">
@@ -76,12 +85,11 @@ export const App: React.FC = () => {
 
       <ul>
         <ul>
-          <li data-cy="Good">Dumplings</li>
-          <li data-cy="Good">Carrot</li>
-          <li data-cy="Good">Eggs</li>
-          <li data-cy="Good">Ice cream</li>
-          <li data-cy="Good">Apple</li>
-          <li data-cy="Good">...</li>
+          {reorderedGoods.map(good => (
+            <li key={Date.now()} data-cy="Good">
+              {good}
+            </li>
+          ))}
         </ul>
       </ul>
     </div>
