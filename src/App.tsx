@@ -94,15 +94,22 @@ export const App: React.FC = () => {
           Reverse
         </button>
 
-        <button type="button" className="button is-danger is-light">
+        <button
+          type="button"
+          className="button is-danger is-light"
+          onClick={() => {
+            setSortType(SortType.NONE);
+            setIsReversed(false);
+          }}
+        >
           Reset
         </button>
       </div>
 
       <ul>
         <ul>
-          {reorderedGoods.map(good => (
-            <li key={Date.now()} data-cy="Good">
+          {reorderedGoods.map((good, index) => (
+            <li key={`${good}-${index}`} data-cy="Good">
               {good}
             </li>
           ))}
